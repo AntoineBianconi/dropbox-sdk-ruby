@@ -1225,6 +1225,13 @@ class DropboxClient
     Dropbox::parse_response(response)
   end
 
+  def makeUrl(path, options)
+    response = @session.do_post "/shares/#{@root}#{format_path(path)}", {"short_url"=>'flase'}
+    response.url = response.url.gsub("https://www.dropbox.com", "https://dl.dropboxusercontent.com");
+    Dropbox::parse_response(response)
+  end
+
+
   # Download a thumbnail for an image.
   #
   # Arguments:
